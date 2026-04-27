@@ -72,6 +72,15 @@ st.markdown(
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Gowun+Batang:wght@400;700&display=swap');
 
+    /* Streamlit 기본 UI 숨기기 */
+    #MainMenu { visibility: hidden; }
+    header { visibility: hidden; }
+    footer { visibility: hidden; }
+    [data-testid="stToolbar"] { visibility: hidden; }
+    [data-testid="stDecoration"] { display: none; }
+    [data-testid="stHeader"] { display: none; }
+    .stDeployButton { display: none; }
+
     /* 전체 배경 */
     .stApp {
         background: #f5f0e1;
