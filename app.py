@@ -327,7 +327,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-tab1, tab2, tab3 = st.tabs(["운세 뽑기", "운세 추가하기", "전체 운세 목록"])
+tab1, tab2, tab3 = st.tabs(["운세 뽑기", "운세 추가", "전체 목록"])
 
 # --- 탭 1: 운세 뽑기 ---
 with tab1:
