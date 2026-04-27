@@ -72,39 +72,46 @@ st.markdown(
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Gowun+Batang:wght@400;700&display=swap');
 
-    /* Streamlit 기본 UI 숨기기 */
-    #MainMenu { visibility: hidden; }
-    header { visibility: hidden; }
-    footer { visibility: hidden; }
-    [data-testid="stToolbar"] { visibility: hidden; }
-    [data-testid="stDecoration"] { display: none; }
-    [data-testid="stHeader"] { display: none; }
-    .stDeployButton { display: none; }
-
-    /* 헤더 옆 앵커 링크 숨기기 */
+    /* ===== Streamlit 기본 UI 제거 ===== */
+    #MainMenu, header, footer { visibility: hidden !important; }
+    [data-testid="stToolbar"], [data-testid="stHeader"], [data-testid="stDecoration"], .stDeployButton { display: none !important; }
     [data-testid="stHeaderActionElements"] { display: none !important; }
-    .stHeadingContainer a,
-    [data-testid="stHeading"] a,
-    h1 a, h2 a, h3 a, h4 a {
-        display: none !important;
-    }
+    .stHeadingContainer a, [data-testid="stHeading"] a, h1 a, h2 a, h3 a, h4 a { display: none !important; }
 
-    /* 전체 배경 */
-    .stApp {
-        background: #f5f0e1;
+    /* ===== 전체 배경 ===== */
+    .stApp, [data-testid="stAppViewContainer"] {
+        background: #f5f0e1 !important;
         background-image:
             radial-gradient(at 10% 20%, rgba(180, 140, 90, 0.1) 0px, transparent 50%),
-            radial-gradient(at 90% 80%, rgba(120, 80, 50, 0.08) 0px, transparent 50%);
-        font-family: 'Gowun Batang', 'Nanum Myeongjo', serif;
+            radial-gradient(at 90% 80%, rgba(120, 80, 50, 0.08) 0px, transparent 50%) !important;
+    }
+    .stApp, .stApp *, [data-testid="stAppViewContainer"] * {
+        font-family: 'Gowun Batang', 'Nanum Myeongjo', serif !important;
     }
 
     .block-container {
-        padding-top: 3rem;
-        padding-bottom: 3rem;
-        max-width: 720px;
+        padding-top: 2rem !important;
+        padding-bottom: 3rem !important;
+        max-width: 720px !important;
     }
 
-    /* 헤더 영역 */
+    /* ===== 한자 라벨 ===== */
+    .vintage-label {
+        text-align: center;
+        margin-bottom: 0;
+    }
+    .vintage-label span {
+        display: inline-block;
+        padding: 6px 20px;
+        background: #3d2817;
+        color: #f5f0e1;
+        font-family: 'Nanum Myeongjo', serif !important;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 6px;
+    }
+
+    /* ===== 헤더 영역 (제목 + caption 한 박스 처럼) ===== */
     .stApp h1,
     [data-testid="stHeading"] h1,
     .stMarkdown h1 {
@@ -116,25 +123,27 @@ st.markdown(
         letter-spacing: 8px !important;
         padding: 24px 0 8px 0 !important;
         border-top: 3px double #8b5a3c !important;
+        margin-top: 24px !important;
+        margin-bottom: 0 !important;
     }
-
-    /* caption */
-    [data-testid="stCaptionContainer"] {
-        text-align: center;
+    [data-testid="stCaptionContainer"],
+    .stCaption {
+        text-align: center !important;
         color: #8b5a3c !important;
-        letter-spacing: 4px;
-        padding-bottom: 24px;
-        border-bottom: 3px double #8b5a3c;
-        margin-bottom: 32px;
+        letter-spacing: 4px !important;
+        padding-bottom: 24px !important;
+        border-bottom: 3px double #8b5a3c !important;
+        margin-bottom: 32px !important;
+        font-family: 'Nanum Myeongjo', serif !important;
     }
 
-    /* 탭 */
+    /* ===== 탭 ===== */
     .stTabs [data-baseweb="tab-list"] {
-        justify-content: center;
-        gap: 32px;
-        background: transparent;
-        border-bottom: 1px solid #c9a875;
-        padding-bottom: 4px;
+        justify-content: center !important;
+        gap: 32px !important;
+        background: transparent !important;
+        border-bottom: 1px solid #c9a875 !important;
+        padding: 0 0 4px 0 !important;
     }
     .stTabs [data-baseweb="tab"] {
         background: transparent !important;
@@ -142,41 +151,58 @@ st.markdown(
         font-family: 'Nanum Myeongjo', serif !important;
         font-weight: 700 !important;
         font-size: 1rem !important;
-        letter-spacing: 2px;
-        padding: 8px 16px !important;
+        letter-spacing: 2px !important;
+        padding: 12px 20px !important;
+        height: auto !important;
     }
-    .stTabs [aria-selected="true"] {
+    .stTabs [data-baseweb="tab"][aria-selected="true"] {
         color: #3d2817 !important;
         border-bottom: 3px solid #8b5a3c !important;
     }
-    .stTabs [data-baseweb="tab-highlight"] { background: transparent !important; }
+    .stTabs [data-baseweb="tab-highlight"] { background: transparent !important; display: none !important; }
+    .stTabs [data-baseweb="tab-border"] { background: transparent !important; }
+    .stTabs [data-baseweb="tab-panel"] { padding-top: 24px !important; }
 
-    /* 버튼 */
-    .stButton > button, .stFormSubmitButton > button {
+    /* ===== 버튼 ===== */
+    .stButton > button,
+    .stFormSubmitButton > button,
+    button[kind="primary"],
+    button[data-testid="baseButton-primary"],
+    button[data-testid="baseButton-primaryFormSubmit"] {
         background: #3d2817 !important;
         color: #f5f0e1 !important;
         border: 2px solid #3d2817 !important;
         border-radius: 0 !important;
         padding: 18px !important;
         font-family: 'Nanum Myeongjo', serif !important;
-        font-size: 1.1rem !important;
+        font-size: 1.15rem !important;
         font-weight: 700 !important;
         letter-spacing: 8px !important;
         transition: background 0.2s, border-color 0.2s !important;
+        box-shadow: none !important;
     }
-    .stButton > button:hover, .stFormSubmitButton > button:hover {
+    .stButton > button:hover,
+    .stFormSubmitButton > button:hover,
+    button[kind="primary"]:hover,
+    button[data-testid="baseButton-primary"]:hover,
+    button[data-testid="baseButton-primaryFormSubmit"]:hover {
         background: #5d3a23 !important;
         border-color: #5d3a23 !important;
         color: #f5f0e1 !important;
     }
+    .stButton > button p, .stFormSubmitButton > button p {
+        font-family: 'Nanum Myeongjo', serif !important;
+        letter-spacing: 8px !important;
+        margin: 0 !important;
+    }
 
-    /* 운세 카드 */
+    /* ===== 운세 카드 ===== */
     .fortune-card {
         margin-top: 32px;
         background: #fffbf0;
         background-image:
             repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(139,90,60,0.03) 35px, rgba(139,90,60,0.03) 36px);
-        padding: 56px 32px;
+        padding: 56px 32px 64px 32px;
         text-align: center;
         border: 1px solid #c9a875;
         box-shadow:
@@ -185,76 +211,104 @@ st.markdown(
             inset 0 0 60px rgba(139,90,60,0.04);
         position: relative;
     }
-    .fortune-card::before, .fortune-card::after {
-        content: '※';
+    .fortune-card .deco-top,
+    .fortune-card .deco-bottom {
         color: #8b5a3c;
         font-size: 1.5rem;
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
     }
-    .fortune-card::before { top: 16px; }
-    .fortune-card::after { bottom: 16px; }
+    .fortune-card .deco-top { top: 16px; }
+    .fortune-card .deco-bottom { bottom: 16px; }
     .fortune-text {
-        font-family: 'Nanum Myeongjo', serif;
-        font-size: 1.7rem;
-        line-height: 2;
-        color: #3d2817;
-        font-weight: 700;
-        letter-spacing: 2px;
-        margin: 0;
+        font-family: 'Nanum Myeongjo', serif !important;
+        font-size: 1.7rem !important;
+        line-height: 2 !important;
+        color: #3d2817 !important;
+        font-weight: 700 !important;
+        letter-spacing: 2px !important;
+        margin: 0 !important;
     }
     .fortune-id {
-        color: #8b5a3c;
-        font-size: 0.85rem;
-        margin-top: 24px;
-        font-family: 'Nanum Myeongjo', serif;
-        letter-spacing: 4px;
+        color: #8b5a3c !important;
+        font-size: 0.85rem !important;
+        margin-top: 24px !important;
+        margin-bottom: 0 !important;
+        font-family: 'Nanum Myeongjo', serif !important;
+        letter-spacing: 4px !important;
     }
 
-    /* 운세 목록 */
+    /* ===== 운세 목록 ===== */
     .list-card {
         background: #fffbf0;
         border: 1px solid #c9a875;
         padding: 16px 24px;
         margin: 8px 0;
-        font-family: 'Nanum Myeongjo', serif;
+        font-family: 'Nanum Myeongjo', serif !important;
         font-size: 1.15rem;
         color: #3d2817;
         font-weight: 500;
         letter-spacing: 1px;
+        box-shadow: 0 1px 0 #e6dab8;
     }
 
-    /* 운세 추가 폼 안내 텍스트 */
+    /* ===== 운세 추가 안내 텍스트 ===== */
     .stMarkdown p {
-        color: #5d3a23;
-        font-family: 'Nanum Myeongjo', serif;
+        color: #5d3a23 !important;
+        font-family: 'Nanum Myeongjo', serif !important;
         letter-spacing: 1px;
     }
 
-    /* input/textarea */
-    .stTextInput > div > div > input,
+    /* ===== input/textarea ===== */
+    .stTextInput input,
     .stTextArea textarea {
         background: #fffbf0 !important;
         border: 1px solid #c9a875 !important;
         border-radius: 0 !important;
         font-family: 'Nanum Myeongjo', serif !important;
         color: #3d2817 !important;
+        letter-spacing: 1px !important;
     }
-    .stTextInput > div > div > input:focus,
+    .stTextInput input:focus,
     .stTextArea textarea:focus {
         border-color: #8b5a3c !important;
         box-shadow: 0 0 0 2px rgba(139,90,60,0.2) !important;
+        outline: none !important;
     }
-    .stTextArea label, .stTextInput label {
+    .stTextArea label, .stTextInput label,
+    .stTextArea label p, .stTextInput label p {
         color: #3d2817 !important;
         font-family: 'Nanum Myeongjo', serif !important;
         font-weight: 700 !important;
         letter-spacing: 2px !important;
     }
 
-    /* alert */
-    .stAlert { border-radius: 0 !important; }
+    /* ===== alert (success, warning, error) ===== */
+    [data-testid="stAlert"] {
+        border-radius: 0 !important;
+        background: #fffbf0 !important;
+        border: 1px solid #c9a875 !important;
+        font-family: 'Nanum Myeongjo', serif !important;
+        color: #3d2817 !important;
+        letter-spacing: 1px;
+    }
+    [data-testid="stAlert"] * {
+        color: #3d2817 !important;
+        font-family: 'Nanum Myeongjo', serif !important;
+    }
+
+    /* ===== 폼 컨테이너 ===== */
+    [data-testid="stForm"] {
+        border: none !important;
+        padding: 0 !important;
+        background: transparent !important;
+    }
+
+    /* ===== 일반 텍스트 색 ===== */
+    .stApp, .stMarkdown, .stMarkdown div, .stMarkdown span {
+        color: #3d2817;
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -262,10 +316,7 @@ st.markdown(
 
 # 한자 라벨
 st.markdown(
-    '<div style="text-align: center; margin-bottom: -16px;">'
-    '<span style="display: inline-block; padding: 4px 16px; background: #3d2817; color: #f5f0e1; '
-    'font-family: \'Nanum Myeongjo\', serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 4px;">運勢</span>'
-    '</div>',
+    '<div class="vintage-label"><span>運勢</span></div>',
     unsafe_allow_html=True,
 )
 
@@ -283,8 +334,10 @@ with tab1:
                 st.markdown(
                     f"""
                     <div class="fortune-card">
+                        <span class="deco-top">※</span>
                         <p class="fortune-text">{fortune['text']}</p>
                         <p class="fortune-id">FORTUNE NO. {fortune['id']:02d}</p>
+                        <span class="deco-bottom">※</span>
                     </div>
                     """,
                     unsafe_allow_html=True,
@@ -315,7 +368,7 @@ with tab2:
 with tab3:
     try:
         fortunes = fetch_all_fortunes()
-        st.write(f"DB에 저장된 운세: **{len(fortunes)}개**")
+        st.write(f"DB에 저장된 운세: {len(fortunes)}개")
         for f in fortunes:
             st.markdown(
                 f'<div class="list-card">{f["text"]}</div>',
