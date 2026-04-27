@@ -95,46 +95,40 @@ st.markdown(
         max-width: 720px !important;
     }
 
-    /* ===== 한자 라벨 ===== */
-    .vintage-label {
+    /* ===== 헤더 박스 (한자 + 제목 + 부제 한 묶음) ===== */
+    .vintage-header {
         text-align: center;
-        margin-bottom: 0;
+        padding: 24px 0;
+        margin-bottom: 32px;
+        border-top: 3px double #8b5a3c;
+        border-bottom: 3px double #8b5a3c;
     }
-    .vintage-label span {
+    .vintage-label {
         display: inline-block;
         padding: 6px 20px;
         background: #3d2817;
-        color: #f5f0e1;
+        color: #f5f0e1 !important;
         font-family: 'Nanum Myeongjo', serif !important;
         font-size: 0.85rem;
         font-weight: 700;
         letter-spacing: 6px;
+        margin-bottom: 16px;
     }
-
-    /* ===== 헤더 영역 (제목 + caption 한 박스 처럼) ===== */
-    .stApp h1,
-    [data-testid="stHeading"] h1,
-    .stMarkdown h1 {
+    .vintage-title {
         font-family: 'Nanum Myeongjo', serif !important;
         font-weight: 800 !important;
         font-size: 2.8rem !important;
         color: #3d2817 !important;
-        text-align: center !important;
         letter-spacing: 8px !important;
-        padding: 24px 0 8px 0 !important;
-        border-top: 3px double #8b5a3c !important;
-        margin-top: 24px !important;
-        margin-bottom: 0 !important;
+        margin: 0 !important;
+        line-height: 1.2 !important;
     }
-    [data-testid="stCaptionContainer"],
-    .stCaption {
-        text-align: center !important;
+    .vintage-subtitle {
         color: #8b5a3c !important;
-        letter-spacing: 4px !important;
-        padding-bottom: 24px !important;
-        border-bottom: 3px double #8b5a3c !important;
-        margin-bottom: 32px !important;
         font-family: 'Nanum Myeongjo', serif !important;
+        font-size: 0.95rem !important;
+        margin: 8px 0 0 0 !important;
+        letter-spacing: 4px;
     }
 
     /* ===== 탭 ===== */
@@ -150,10 +144,17 @@ st.markdown(
         color: #8b5a3c !important;
         font-family: 'Nanum Myeongjo', serif !important;
         font-weight: 700 !important;
-        font-size: 1rem !important;
-        letter-spacing: 2px !important;
-        padding: 12px 20px !important;
+        font-size: 1.2rem !important;
+        letter-spacing: 3px !important;
+        padding: 14px 24px !important;
         height: auto !important;
+    }
+    .stTabs [data-baseweb="tab"] p,
+    .stTabs [data-baseweb="tab"] div {
+        font-family: 'Nanum Myeongjo', serif !important;
+        font-size: 1.2rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 3px !important;
     }
     .stTabs [data-baseweb="tab"][aria-selected="true"] {
         color: #3d2817 !important;
@@ -314,14 +315,17 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# 한자 라벨
+# 헤더 박스 (한자 + 제목 + 부제)
 st.markdown(
-    '<div class="vintage-label"><span>運勢</span></div>',
+    """
+    <div class="vintage-header">
+        <span class="vintage-label">運勢</span>
+        <h1 class="vintage-title">오늘의 운세</h1>
+        <p class="vintage-subtitle">RDS · WEEK 9</p>
+    </div>
+    """,
     unsafe_allow_html=True,
 )
-
-st.title("오늘의 운세")
-st.caption("RDS · WEEK 9")
 
 tab1, tab2, tab3 = st.tabs(["운세 뽑기", "운세 추가하기", "전체 운세 목록"])
 
