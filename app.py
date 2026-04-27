@@ -81,6 +81,14 @@ st.markdown(
     [data-testid="stHeader"] { display: none; }
     .stDeployButton { display: none; }
 
+    /* 헤더 옆 앵커 링크 숨기기 */
+    [data-testid="stHeaderActionElements"] { display: none !important; }
+    .stHeadingContainer a,
+    [data-testid="stHeading"] a,
+    h1 a, h2 a, h3 a, h4 a {
+        display: none !important;
+    }
+
     /* 전체 배경 */
     .stApp {
         background: #f5f0e1;
@@ -97,15 +105,17 @@ st.markdown(
     }
 
     /* 헤더 영역 */
-    h1 {
+    .stApp h1,
+    [data-testid="stHeading"] h1,
+    .stMarkdown h1 {
         font-family: 'Nanum Myeongjo', serif !important;
         font-weight: 800 !important;
         font-size: 2.8rem !important;
         color: #3d2817 !important;
-        text-align: center;
+        text-align: center !important;
         letter-spacing: 8px !important;
         padding: 24px 0 8px 0 !important;
-        border-top: 3px double #8b5a3c;
+        border-top: 3px double #8b5a3c !important;
     }
 
     /* caption */
