@@ -353,7 +353,7 @@ with tab1:
 
 # --- 탭 2: 운세 추가 ---
 with tab2:
-    st.write("새로운 운세를 추가하면 다른 사람도 뽑을 수 있어요")
+    st.write("내 DB에 새 운세를 추가하면 '운세 뽑기'에서도 나올 수 있어요")
     with st.form("add_fortune_form", clear_on_submit=True):
         text = st.text_area("운세 메시지", placeholder="예: 오늘은 새로운 시작에 좋은 날입니다")
         submitted = st.form_submit_button("DB에 저장", type="primary", use_container_width=True)
